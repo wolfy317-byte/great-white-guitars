@@ -2,7 +2,7 @@ interface LaunchPageProps {
   onEnterSite: () => void;
 }
 
-const YT_VIDEO_ID = "ykGj7og709w";
+
 
 export default function LaunchPage({ onEnterSite }: LaunchPageProps) {
   return (
@@ -21,12 +21,6 @@ export default function LaunchPage({ onEnterSite }: LaunchPageProps) {
           32%  { top:-12%; opacity:0; transform:rotate(-4deg) translateX(0px); filter:brightness(1.05) saturate(0.9) hue-rotate(0deg); }
           100% { top:-12%; opacity:0; transform:rotate(-4deg) translateX(0px); filter:brightness(1.05) saturate(0.9) hue-rotate(0deg); }
         }
-        @keyframes yt-cover {
-          0%   { opacity: 1; }
-          8%   { opacity: 0; }
-          97%  { opacity: 0; }
-          100% { opacity: 1; }
-        }
       `}</style>
 
       {/* Page root */}
@@ -34,15 +28,14 @@ export default function LaunchPage({ onEnterSite }: LaunchPageProps) {
 
         {/* ── Fixed video ── */}
         <div className="fixed inset-0 overflow-hidden" style={{ zIndex: 0, pointerEvents: "none" }}>
-          <iframe
-            src={`https://www.youtube.com/embed/${YT_VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${YT_VIDEO_ID}&controls=0&rel=0&showinfo=0&modestbranding=1&playsinline=1&disablekb=1&iv_load_policy=3`}
-            allow="autoplay; fullscreen"
-            className="absolute"
-            style={{ top: "-5%", left: "-5%", width: "110%", height: "115%", border: "none", pointerEvents: "none" }}
-            title="Background video"
+          <video
+            src="/launch-bg.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            style={{ position: "absolute", top: "-5%", left: "-5%", width: "110%", height: "115%", objectFit: "cover", pointerEvents: "none" }}
           />
-          {/* CSS overlay — blocks all pointer events reaching the iframe */}
-          <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", zIndex: 2, pointerEvents: "all", background: "transparent" }} />
         </div>
 
         {/* ── Fixed dark overlay ── */}
@@ -71,8 +64,8 @@ export default function LaunchPage({ onEnterSite }: LaunchPageProps) {
 
           {/* Logo + badge */}
           <div className="relative z-10 flex flex-col items-center gap-8 pt-24 pb-40 px-6">
-            <div className="inline-flex items-center gap-2.5 rounded-full border border-blue-700/40 bg-blue-950/30 px-5 py-2 text-sm text-blue-300 tracking-widest uppercase backdrop-blur-sm">
-              <span className="h-1.5 w-1.5 rounded-full bg-blue-400 animate-pulse" />
+            <div className="inline-flex items-center gap-2.5 rounded-full border border-zinc-600/40 bg-zinc-800/30 px-5 py-2 text-sm text-zinc-300 tracking-widest uppercase backdrop-blur-sm">
+              <span className="h-1.5 w-1.5 rounded-full bg-zinc-400 animate-pulse" />
               Coming Soon
             </div>
             <img
@@ -137,7 +130,7 @@ export default function LaunchPage({ onEnterSite }: LaunchPageProps) {
                 onMouseEnter={e => { (e.currentTarget as HTMLImageElement).style.filter = "brightness(1) saturate(1) drop-shadow(0 0 12px rgba(100,200,255,0.4))"; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLImageElement).style.filter = "brightness(0.85) saturate(0.9)"; }}
               />
-              <span className="absolute inset-0 rounded-sm ring-2 ring-blue-400/0 group-hover:ring-blue-400/30 transition-all duration-300" />
+              <span className="absolute inset-0 rounded-sm ring-2 ring-zinc-400/0 group-hover:ring-zinc-400/30 transition-all duration-300" />
             </button>
             <span className="text-zinc-600 text-xs tracking-widest uppercase">enter at your own risk</span>
           </div>

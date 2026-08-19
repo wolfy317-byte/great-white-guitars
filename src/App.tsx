@@ -4,10 +4,12 @@ import { useState, useEffect, useRef } from "react";
 import LaunchPage from "@/components/LaunchPage";
 import ModelPage from "@/components/ModelPage";
 import TigerSharkPage from "@/components/TigerSharkPage";
+import PartnershipAttribution from "@/components/PartnershipAttribution";
+import ContactPage from "@/components/ContactPage";
 
 const TRANSITION_VIDEO_SRC = "/transition.mov";
 
-function VideoTransition({ destination, onComplete }: { destination: "meg" | "tiger-shark"; onComplete: () => void }) {
+function VideoTransition({ onComplete }: { onComplete: () => void }) {
   const [visible, setVisible] = useState(false);
   const [fadingOut, setFadingOut] = useState(false);
   const completed = useRef(false);
@@ -65,7 +67,7 @@ function VideoTransition({ destination, onComplete }: { destination: "meg" | "ti
 }
 
 function App() {
-  const [page, setPage] = useState<"launch" | "site" | "meg" | "tiger-shark">("launch");
+  const [page, setPage] = useState<"launch" | "site" | "meg" | "tiger-shark" | "contact">("launch");
   const [transitioning, setTransitioning] = useState<null | "meg" | "tiger-shark">(null);
 
   const handleModelClick = (dest: "meg" | "tiger-shark") => {
@@ -86,11 +88,12 @@ function App() {
   return (
     <>
       {transitioning && (
-        <VideoTransition destination={transitioning} onComplete={handleTransitionComplete} />
+        <VideoTransition onComplete={handleTransitionComplete} />
       )}
       {page === "launch" && <LaunchPage onEnterSite={() => setPage("site")} />}
       {page === "meg" && <ModelPage onBack={() => setPage("site")} />}
       {page === "tiger-shark" && <TigerSharkPage onBack={() => setPage("site")} />}
+      {page === "contact" && <ContactPage onBack={() => setPage("site")} />}
       {page === "site" && (
     <div className="min-h-screen text-zinc-50 font-sans selection:bg-zinc-800" style={{ background: "#04111f" }}>
       {/* Navigation */}
@@ -103,8 +106,9 @@ function App() {
             <a href="#models" className="hover:text-white transition-colors">Models</a>
             <a href="#about" className="hover:text-white transition-colors">The Hybrid Concept</a>
             <a href="#custom" className="hover:text-white transition-colors">Custom Shop</a>
+            <button onClick={() => setPage("contact")} className="hover:text-white transition-colors">Contact</button>
           </div>
-          <Button variant="outline" className="hidden md:flex border-zinc-700 hover:bg-zinc-800 hover:text-white text-zinc-300">
+          <Button onClick={() => setPage("contact")} variant="outline" className="hidden md:flex border-zinc-700 hover:bg-zinc-800 hover:text-white text-zinc-300">
             Build Yours
           </Button>
         </div>
@@ -236,16 +240,28 @@ function App() {
               </div>
               <h3 className="text-xl font-semibold mb-3">Boutique Build</h3>
               <p className="text-zinc-300 leading-relaxed">
-                Hand-finished necks, tops, and bodies, stainless steel frets, and locking tuners come standard on every Great White instrument.
+                Designed by Great White Guitars and brought to life by Pyro Guitars, our primary manufacturing partner. Hand-finished necks, tops, and bodies, stainless steel frets, and locking tuners come standard.
               </p>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Manufacturing partnership */}
+      <section className="border-t border-zinc-800/50 bg-[#030d18] py-16 px-6">
+        <div className="max-w-3xl mx-auto flex flex-col items-center gap-8 text-center">
+          <PartnershipAttribution />
+          <p className="max-w-2xl text-sm md:text-base text-zinc-400 leading-relaxed">
+            Great White Guitars creates original instrument concepts, visual identities, and designs.
+            Pyro Guitars brings those designs to life through experienced craftsmanship and manufacturing.
+          </p>
+        </div>
+      </section>
+
       {/* Footer */}
-      <footer className="border-t border-zinc-800/50 py-12 text-center text-zinc-400 bg-[#04111f]">
-        <p>&copy; {new Date().getFullYear()} Great White Guitars. All rights reserved.</p>
+      <footer className="border-t border-zinc-800/50 py-10 text-center text-zinc-500 bg-[#04111f]">
+        <PartnershipAttribution compact />
+        <p className="mt-6 text-xs">&copy; {new Date().getFullYear()} Great White Guitars. All rights reserved.</p>
       </footer>
     </div>
       )}

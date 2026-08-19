@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { cn } from "@/lib/utils";
+import PartnershipAttribution from "@/components/PartnershipAttribution";
 
 interface TigerSharkPageProps {
   onBack: () => void;
@@ -26,6 +27,13 @@ const FINISHES = [
     subtitle: "Flame Maple",
     swatch: "/swatch-tiger-storm.png",
     image: "/tiger-storm.png",
+  },
+  {
+    id: "pyro-shark",
+    name: "Pyro-Shark",
+    subtitle: "Flame Maple",
+    swatch: "/swatch-tiger-pyro-shark.png",
+    image: "/tiger-pyro-shark.png",
   },
 ];
 
@@ -291,8 +299,9 @@ export default function TigerSharkPage({ onBack }: TigerSharkPageProps) {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-zinc-800/50 py-8 text-center text-zinc-600 text-xs">
-        <p>&copy; {new Date().getFullYear()} Great White Guitars. All rights reserved.</p>
+      <footer className="border-t border-zinc-800/50 py-10 text-center text-zinc-600 text-xs">
+        <PartnershipAttribution compact />
+        <p className="mt-6">&copy; {new Date().getFullYear()} Great White Guitars. All rights reserved.</p>
       </footer>
     </div>
   );

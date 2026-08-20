@@ -1,5 +1,6 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { cn } from "@/lib/utils";
+import PartnershipAttribution from "@/components/PartnershipAttribution";
 
 interface ModelPageProps {
   onBack: () => void;
@@ -307,8 +308,9 @@ export default function ModelPage({ onBack }: ModelPageProps) {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-zinc-800/50 py-8 text-center text-zinc-600 text-xs">
-        <p>&copy; {new Date().getFullYear()} Great White Guitars. All rights reserved.</p>
+      <footer className="border-t border-zinc-800/50 py-10 text-center text-zinc-600 text-xs">
+        <PartnershipAttribution compact />
+        <p className="mt-6">&copy; {new Date().getFullYear()} Great White Guitars. All rights reserved.</p>
       </footer>
     </div>
   );
